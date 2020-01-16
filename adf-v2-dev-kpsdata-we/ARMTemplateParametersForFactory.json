@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-v2-dev-kpsdata-we"
+		},
+		"LK_Landing_accountKey": {
+			"value": ""
+		},
+		"LK_Landing_properties_typeProperties_url": {
+			"value": "https://kpsdevdatalake.dfs.core.windows.net"
+		}
+	}
+}
