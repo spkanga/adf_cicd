@@ -1,5 +1,5 @@
 {
-	"name": "adf-ingestion-blob-2-blob",
+	"name": "adf",
 	"properties": {
 		"activities": [
 			{
@@ -86,6 +86,22 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Wait",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "Copy From Blob to Blob",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 2
+				}
 			}
 		],
 		"folder": {
