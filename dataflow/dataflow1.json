@@ -1,0 +1,37 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "SourceData"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					},
+					"name": "OffsetsTable"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "CrossJoin"
+				},
+				{
+					"name": "GenerateSurrogateKey"
+				},
+				{
+					"name": "IncrementSurrogateKey"
+				}
+			],
+			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> SourceData\nsource(output(\n\t\tOffSet as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> OffsetsTable\nSourceData, OffsetsTable join(1 == 1,\n\tjoinType:'cross',\n\tbroadcast: 'none')~> CrossJoin\nCrossJoin keyGenerate(output(EmployeeKey as long),\n\tstartAt: 2L) ~> GenerateSurrogateKey\nGenerateSurrogateKey derive(EmployeeKey = EmployeeKey + OffSet) ~> IncrementSurrogateKey"
+		}
+	}
+}
