@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "dataflow2",
+				"name": "Employee Type1",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
