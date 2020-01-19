@@ -1,0 +1,41 @@
+{
+	"name": "Type2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Employee2Tbl",
+						"type": "DatasetReference"
+					},
+					"name": "StgSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "DWHSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlOffsets",
+						"type": "DatasetReference"
+					},
+					"name": "Offsets"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "HashValueStream"
+				},
+				{
+					"name": "JoinWithOffetStream"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\tBusinessEntityID as string,\n\t\tNationalIDNumber as string,\n\t\tLoginID as string,\n\t\tOrganizationNode as string,\n\t\tOrganizationLevel as string,\n\t\tJobTitle as string,\n\t\tBirthDate as string,\n\t\tMaritalStatus as string,\n\t\tGender as string,\n\t\tHireDate as string,\n\t\tSalariedFlag as string,\n\t\tVacationHours as string,\n\t\tSickLeaveHours as string,\n\t\tCurrentFlag as string,\n\t\trowguid as string,\n\t\tModifiedDate as string,\n\t\t{_inserted} as timestamp,\n\t\t{_lastUpdated} as timestamp,\n\t\tStgHash as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'SELECT * FROM [dbo].[employee2]',\n\tformat: 'query') ~> StgSource\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'SELECT [dwh_EmployeeKey]\\n      ,[dwh_BusinessEntityID]\\nFROM [dbo].[dimEmployee2]\\nWHERE [Current] = 1',\n\tformat: 'query') ~> DWHSource\nsource(output(\n\t\tOffSet as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Offsets\nStgSource derive(StgHash = sha2(256, LoginID + OrganizationNode + OrganizationLevel + JobTitle)) ~> HashValueStream\nHashValueStream, Offsets join(1 == 1,\n\tjoinType:'cross',\n\tbroadcast: 'none')~> JoinWithOffetStream"
+		}
+	}
+}

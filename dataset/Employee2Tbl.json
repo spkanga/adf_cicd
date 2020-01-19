@@ -1,0 +1,97 @@
+{
+	"name": "Employee2Tbl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase5",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "BusinessEntityID",
+				"type": "varchar"
+			},
+			{
+				"name": "NationalIDNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "LoginID",
+				"type": "varchar"
+			},
+			{
+				"name": "OrganizationNode",
+				"type": "varchar"
+			},
+			{
+				"name": "OrganizationLevel",
+				"type": "varchar"
+			},
+			{
+				"name": "JobTitle",
+				"type": "varchar"
+			},
+			{
+				"name": "BirthDate",
+				"type": "varchar"
+			},
+			{
+				"name": "MaritalStatus",
+				"type": "varchar"
+			},
+			{
+				"name": "Gender",
+				"type": "varchar"
+			},
+			{
+				"name": "HireDate",
+				"type": "varchar"
+			},
+			{
+				"name": "SalariedFlag",
+				"type": "varchar"
+			},
+			{
+				"name": "VacationHours",
+				"type": "varchar"
+			},
+			{
+				"name": "SickLeaveHours",
+				"type": "varchar"
+			},
+			{
+				"name": "CurrentFlag",
+				"type": "varchar"
+			},
+			{
+				"name": "rowguid",
+				"type": "varchar"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "varchar"
+			},
+			{
+				"name": "_inserted",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "_lastUpdated",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "StgHash",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "employee2"
+		}
+	}
+}
