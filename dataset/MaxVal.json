@@ -1,0 +1,81 @@
+{
+	"name": "MaxVal",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MaxValDWH",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "dwh_EmployeeKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "dwh_BusinessEntityID",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_NationalIDNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_LoginID",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_OrganizationNode",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_OrganizationLevel",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_JobTitle",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_BirthDate",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_inserted",
+				"type": "varchar"
+			},
+			{
+				"name": "dwh_lastUpdated",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "dwh_HashValue",
+				"type": "varchar"
+			},
+			{
+				"name": "Current",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "EffectiveStartDateTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "EffectiveEndDateTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dimEmployee2"
+		}
+	}
+}
