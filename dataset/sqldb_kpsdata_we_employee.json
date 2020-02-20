@@ -1,92 +1,85 @@
 {
-	"name": "customercsv",
+	"name": "sqldb_kpsdata_we_employee",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorageLanding",
+			"referenceName": "AzureSqlDatabaseEDW",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
-		"typeProperties": {
-			"location": {
-				"type": "AzureBlobStorageLocation",
-				"fileName": "Customer.csv",
-				"container": "landing"
-			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"firstRowAsHeader": true,
-			"quoteChar": "\""
-		},
+		"type": "AzureSqlTable",
 		"schema": [
 			{
 				"name": "CustomerAlternateKey",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "FirstName",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "MiddleName",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "LastName",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "BirthDate",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "MaritalStatus",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "Gender",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "EmailAddress",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "YearlyIncome",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "TotalChildren",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NumberChildrenAtHome",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "HouseOwnerFlag",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NumberCarsOwned",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "AddressLine1",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "Phone",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DateFirstPurchase",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CommuteDistance",
-				"type": "String"
+				"type": "varchar"
 			}
-		]
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "stgCustomer"
+		}
 	}
 }
