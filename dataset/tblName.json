@@ -1,0 +1,26 @@
+{
+	"name": "tblName",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TargetForDynamic",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Name",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "stgCustomer2"
+		}
+	}
+}
