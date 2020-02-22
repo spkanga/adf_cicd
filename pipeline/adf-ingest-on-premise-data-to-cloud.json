@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_NAME IN\n(\n'DimReseller'\n)",
+						"sqlReaderQuery": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_NAME IN\n(\n'DimEmployee'\n)",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
@@ -144,12 +144,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"pFOREACHSOURCETABLE": {
-				"type": "string",
-				"defaultValue": "ForEach Source Table"
-			}
-		},
 		"variables": {
 			"vTableName": {
 				"type": "String"
