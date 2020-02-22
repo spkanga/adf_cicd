@@ -149,7 +149,7 @@
 		"typeProperties": {
 			"schema": "dbo",
 			"table": {
-				"value": "@item().value",
+				"value": "@item().TABLE_NAME",
 				"type": "Expression"
 			}
 		}
