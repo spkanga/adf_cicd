@@ -49,14 +49,7 @@
 						{
 							"name": "Copy data1",
 							"type": "Copy",
-							"dependsOn": [
-								{
-									"activity": "Set vTableName",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -70,6 +63,9 @@
 									"type": "SqlServerSource",
 									"queryTimeout": "02:00:00"
 								},
+								"sink": {
+									"type": "AzureSqlSink"
+								},
 								"enableStaging": false
 							},
 							"inputs": [
@@ -77,20 +73,13 @@
 									"referenceName": "DynamicSourceTable",
 									"type": "DatasetReference"
 								}
-							]
-						},
-						{
-							"name": "Set vTableName",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "vTableName",
-								"value": {
-									"value": "@item().value",
-									"type": "Expression"
+							],
+							"outputs": [
+								{
+									"referenceName": "DW",
+									"type": "DatasetReference"
 								}
-							}
+							]
 						}
 					]
 				}

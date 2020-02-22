@@ -148,7 +148,10 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "FactInternetSales"
+			"table": {
+				"value": "@item().value",
+				"type": "Expression"
+			}
 		}
 	}
 }
