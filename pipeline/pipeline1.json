@@ -1,0 +1,111 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "LkpSourceTable",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_NAME NOT IN\n(\n'vDMPrep'\n,'vTimeSeries'\n,'vTargetMail'\n,'vAssocSeqOrders'\n,'vAssocSeqLineItems'\n,'DatabaseLog'\n,'AdventureWorksDWBuildVersion'\n,'sysdiagrams'\n)",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "localhost",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach SourceTable",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LkpSourceTable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LkpSourceTable').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Set vTableName",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"queryTimeout": "02:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "DynamicSourceTable",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Set vTableName",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "vTableName",
+								"value": {
+									"value": "@item().value",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"pTABLENAME": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"vTableName": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
