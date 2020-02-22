@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "adf-ingest-on-premise-data-to-cloud",
 	"properties": {
 		"activities": [
 			{
@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_NAME NOT IN\n(\n'vDMPrep'\n,'vTimeSeries'\n,'vTargetMail'\n,'vAssocSeqOrders'\n,'vAssocSeqLineItems'\n,'DatabaseLog'\n,'AdventureWorksDWBuildVersion'\n,'sysdiagrams'\n)",
+						"sqlReaderQuery": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_NAME IN\n(\n---'DimGeography'\n 'dimCustomer'\n,'FactInternetSales'\n)",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
@@ -47,7 +47,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Copy data1",
+							"name": "Copy On-Premise To Cloud",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -85,11 +85,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"pTABLENAME": {
-				"type": "string"
-			}
-		},
 		"variables": {
 			"vTableName": {
 				"type": "String"
