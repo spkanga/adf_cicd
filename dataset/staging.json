@@ -1,0 +1,16 @@
+{
+	"name": "staging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datawarehouse",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "stgCustomer"
+		}
+	}
+}
