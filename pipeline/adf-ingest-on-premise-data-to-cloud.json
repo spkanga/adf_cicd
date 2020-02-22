@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_NAME IN\n(\n---'DimGeography'\n 'dimCustomer'\n,'FactInternetSales'\n)",
+						"sqlReaderQuery": "SELECT TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_NAME IN\n(\n'DimReseller'\n)",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
@@ -85,7 +85,7 @@
 				}
 			},
 			{
-				"name": "Email Success Status",
+				"name": "Send Success Email",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -109,16 +109,47 @@
 					"headers": {
 						"Content-Type": "application/json"
 					},
+					"body": "{\n   \"DataFactoryName\": \"@{pipeline().DataFactory}\",\n   \"PipelineName\": \"@{pipeline().Pipeline}\",\n   \"Subject\": \"Data Ingestion - Success\",\n   \"ErrorMessage\": \"No Error has occurred\",\n   \"EmailTo\": “spkanga@gmail.com\"\n}\t\n"
+				}
+			},
+			{
+				"name": "Send Failure Email",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ForEach Source Table",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-106.westeurope.logic.azure.com:443/workflows/19210ef00dd9456a955ed70622878540/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jh9-sENDFE4lmnW_mTXrL5LlaTucSnE11E8d4LP9ysE",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
 					"body": {
-						"DataFactoryName": "@{pipeline().DataFactory}",
-						"PipelineName": "@{pipeline().Pipeline}",
-						"Subject": "An error has occurred!",
-						"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-						"EmailTo": "myemail@outlook.com"
+						"value": "@{activity('ForEach Source Table').Error.Message}",
+						"type": "Expression"
 					}
 				}
 			}
 		],
+		"parameters": {
+			"pFOREACHSOURCETABLE": {
+				"type": "string",
+				"defaultValue": "ForEach Source Table"
+			}
+		},
 		"variables": {
 			"vTableName": {
 				"type": "String"
