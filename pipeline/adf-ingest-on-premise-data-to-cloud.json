@@ -28,7 +28,7 @@
 				}
 			},
 			{
-				"name": "ForEach Source Table",
+				"name": "ForEachSourceTable",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -89,7 +89,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "ForEach Source Table",
+						"activity": "ForEachSourceTable",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -113,11 +113,11 @@
 				}
 			},
 			{
-				"name": "Execute ADF Messenger",
+				"name": "Execute Pipeline1",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "ForEach Source Table",
+						"activity": "ForEachSourceTable",
 						"dependencyConditions": [
 							"Failed"
 						]
@@ -129,10 +129,29 @@
 						"referenceName": "adf-messenger",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"ErrorMessage": "n",
+						"EmailTo": "x",
+						"Subject": "x"
+					}
 				}
 			}
 		],
+		"parameters": {
+			"EmailTo": {
+				"type": "string",
+				"defaultValue": "spkanga@gmail.com"
+			},
+			"ErrorMessage": {
+				"type": "string",
+				"defaultValue": "@{activity('ForEachSourceTable').Error.Message}"
+			},
+			"Subject": {
+				"type": "string",
+				"defaultValue": "Notification"
+			}
+		},
 		"variables": {
 			"vTableName": {
 				"type": "String"
