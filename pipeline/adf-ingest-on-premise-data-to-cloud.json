@@ -132,7 +132,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"ErrorMessage": "n",
-						"EmailTo": "x",
+						"EmailTo": "info@kpsdata.co.uk",
 						"Subject": "x"
 					}
 				}
