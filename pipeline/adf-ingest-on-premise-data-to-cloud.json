@@ -141,7 +141,7 @@
 		"parameters": {
 			"EmailTo": {
 				"type": "string",
-				"defaultValue": "spkanga@gmail.com"
+				"defaultValue": "info@kpsdata.co.uk"
 			},
 			"ErrorMessage": {
 				"type": "string",
