@@ -30,6 +30,17 @@
 				}
 			}
 		],
+		"parameters": {
+			"ErrorMessage": {
+				"type": "string"
+			},
+			"EmailTo": {
+				"type": "string"
+			},
+			"Subject": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
