@@ -113,8 +113,8 @@
 				}
 			},
 			{
-				"name": "Send Failure Email",
-				"type": "WebActivity",
+				"name": "Execute ADF Messenger",
+				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
 						"activity": "ForEach Source Table",
@@ -123,24 +123,13 @@
 						]
 					}
 				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-106.westeurope.logic.azure.com:443/workflows/19210ef00dd9456a955ed70622878540/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jh9-sENDFE4lmnW_mTXrL5LlaTucSnE11E8d4LP9ysE",
-					"method": "POST",
-					"headers": {
-						"Content-Type": "application/json"
+					"pipeline": {
+						"referenceName": "adf-messenger",
+						"type": "PipelineReference"
 					},
-					"body": {
-						"value": "@{activity('ForEach Source Table').Error.Message}",
-						"type": "Expression"
-					}
+					"waitOnCompletion": true
 				}
 			}
 		],
