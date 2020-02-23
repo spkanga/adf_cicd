@@ -37,7 +37,7 @@
 			},
 			"EmailTo": {
 				"type": "string",
-				"defaultValue": "x"
+				"defaultValue": "info@kpsdata.co.uk"
 			},
 			"Subject": {
 				"type": "string",
