@@ -32,13 +32,16 @@
 		],
 		"parameters": {
 			"ErrorMessage": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "x"
 			},
 			"EmailTo": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "x"
 			},
 			"Subject": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "x"
 			}
 		},
 		"annotations": []
