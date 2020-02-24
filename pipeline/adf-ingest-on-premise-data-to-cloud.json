@@ -109,7 +109,10 @@
 					"headers": {
 						"Content-Type": "application/json"
 					},
-					"body": "{\n   \"DataFactoryName\": \"@{pipeline().DataFactory}\",\n   \"PipelineName\": \"@{pipeline().Pipeline}\",\n   \"Subject\": \"Data Ingestion - Success\",\n   \"ErrorMessage\": \"No Error has occurred\",\n   \"EmailTo\": “spkanga@gmail.com\"\n}\t\n"
+					"body": {
+						"value": "{\n   \"DataFactoryName\": \"@{pipeline().DataFactory}\",\n   \"PipelineName\": \"@{pipeline().Pipeline}\",\n   \"Subject\": \"Data Ingestion - Success\",\n   \"ErrorMessage\": \"No Error has occurred\",\n   \"EmailTo\": “spkanga@gmail.com\"\n}\t\n",
+						"type": "Expression"
+					}
 				}
 			},
 			{
