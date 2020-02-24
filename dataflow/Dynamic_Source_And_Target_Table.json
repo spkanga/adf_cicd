@@ -1,5 +1,5 @@
 {
-	"name": "dataflow4",
+	"name": "Dynamic_Source_And_Target_Table",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
