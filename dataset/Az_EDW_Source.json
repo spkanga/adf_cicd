@@ -1,0 +1,12 @@
+{
+	"name": "Az_EDW_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZ_EDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
