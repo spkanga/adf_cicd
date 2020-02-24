@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT 'DimProduct' as TABLE_NAME\nUNION\nSELECT 'DimProductCategory' as TABLE_NAME",
+						"sqlReaderQuery": "SELECT 'DimProduct' as TABLE_NAME\n----UNION\n----SELECT 'DimProductCategory' as TABLE_NAME",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
@@ -71,6 +71,60 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Send_Success_Email",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "For_Each_Table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-106.westeurope.logic.azure.com:443/workflows/19210ef00dd9456a955ed70622878540/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jh9-sENDFE4lmnW_mTXrL5LlaTucSnE11E8d4LP9ysE",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"DataFactoryName": "@{pipeline().DataFactory}",
+						"PipelineName": "@{pipeline().Pipeline}",
+						"Subject": "INGESTION - SUCCESS",
+						"ErrorMessage": "n/a",
+						"EmailTo": "info@kpsdata.co.uk"
+					}
+				}
+			},
+			{
+				"name": "Send_Failure_Email",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "For_Each_Table",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"annotations": []
