@@ -32,16 +32,13 @@
 		],
 		"parameters": {
 			"ErrorMessage": {
-				"type": "string",
-				"defaultValue": "n"
+				"type": "string"
 			},
 			"EmailTo": {
-				"type": "string",
-				"defaultValue": "info@kpsdata.co.uk"
+				"type": "string"
 			},
 			"Subject": {
-				"type": "string",
-				"defaultValue": "x"
+				"type": "string"
 			}
 		},
 		"annotations": []
