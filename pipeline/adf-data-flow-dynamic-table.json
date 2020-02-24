@@ -111,9 +111,9 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "For_Each_Table",
+						"activity": "Set variable1",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
@@ -125,16 +125,38 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"EmailTo": "spkanga@gmail.co.",
+						"EmailTo": "spkanga@gmail.com",
 						"Subject": "For Each Table Task Failure",
 						"ErrorMessage": {
-							"value": "@{activity('For_Each_Table').Error.Message}",
+							"value": "@variables('vErrorMessage')",
 							"type": "Expression"
 						}
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "For_Each_Table",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "vErrorMessage",
+					"value": "@{activity('For_Each_Table').Error.Message}"
+				}
 			}
 		],
+		"variables": {
+			"vErrorMessage": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
