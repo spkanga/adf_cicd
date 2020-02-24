@@ -60,7 +60,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataflow": {
-									"referenceName": "dataflow4",
+									"referenceName": "Dynamic_Source_And_Target_Table",
 									"type": "DataFlowReference"
 								},
 								"compute": {
