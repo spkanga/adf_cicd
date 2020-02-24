@@ -47,7 +47,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "dataflow4",
+							"name": "DF_Dynamic_Tables",
 							"type": "ExecuteDataFlow",
 							"dependsOn": [],
 							"policy": {
@@ -148,7 +148,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "vErrorMessage",
-					"value": "@{activity('For_Each_Table').Error.Message}"
+					"value": "@{activity('DF_Dynamic_Tables').output.errors}"
 				}
 			}
 		],
