@@ -124,7 +124,11 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-106.westeurope.logic.azure.com:443/workflows/19210ef00dd9456a955ed70622878540/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jh9-sENDFE4lmnW_mTXrL5LlaTucSnE11E8d4LP9ysE",
+					"method": "POST"
+				}
 			}
 		],
 		"annotations": []
