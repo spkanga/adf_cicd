@@ -11,7 +11,7 @@
 		"typeProperties": {
 			"schema": "dbo",
 			"table": {
-				"value": "@activity('Lkp').output.value",
+				"value": "@item().tablename",
 				"type": "Expression"
 			}
 		}
