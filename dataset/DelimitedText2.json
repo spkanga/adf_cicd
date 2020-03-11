@@ -11,13 +11,14 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "itemName",
+					"value": "@item().name",
 					"type": "Expression"
 				},
 				"container": "landing"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
