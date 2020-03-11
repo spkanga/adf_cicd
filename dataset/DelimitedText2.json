@@ -10,10 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@item().tablename",
-					"type": "Expression"
-				},
 				"container": "landing"
 			},
 			"columnDelimiter": ",",
