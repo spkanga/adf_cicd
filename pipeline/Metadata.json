@@ -78,64 +78,18 @@
 								"referenceName": "linkedService1",
 								"type": "LinkedServiceReference"
 							}
-						}
-					]
-				}
-			},
-			{
-				"name": "Lkp",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "ForEach1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT [name] as Tablename\n  FROM [dbo].[t]",
-						"queryTimeout": "02:00:00"
-					},
-					"dataset": {
-						"referenceName": "AzureSqlTable8",
-						"type": "DatasetReference"
-					}
-				}
-			},
-			{
-				"name": "ForEach2",
-				"type": "ForEach",
-				"dependsOn": [
-					{
-						"activity": "Lkp",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Lkp').output.value",
-						"type": "Expression"
-					},
-					"isSequential": true,
-					"activities": [
+						},
 						{
 							"name": "dataflow4",
 							"type": "ExecuteDataFlow",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Stored Procedure1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
