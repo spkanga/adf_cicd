@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@item().name",
+					"value": "@item()",
 					"type": "Expression"
 				},
 				"container": "landing"
