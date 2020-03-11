@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@activity('Lkp').output.value",
+					"value": "@item().tablename",
 					"type": "Expression"
 				},
 				"container": "landing"
