@@ -9,8 +9,11 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "",
-			"table": ""
+			"schema": "dbo",
+			"table": {
+				"value": "item().name",
+				"type": "Expression"
+			}
 		}
 	}
 }
