@@ -11,7 +11,7 @@
 		"typeProperties": {
 			"schema": "dbo",
 			"table": {
-				"value": "@activity('GetMetadata').output.childitems",
+				"value": "itemName",
 				"type": "Expression"
 			}
 		}
